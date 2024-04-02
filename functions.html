@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="textBox" type="text" />
+    <div id="output"></div>
+    <script>
+        // Press a key and learned what you pressed
+        const textBox = document.querySelector("#textBox");
+        const output = document.querySelector("#output");
+
+        textBox.addEventListener("keydown", (event) => {
+            output.textContent = `You pressed "${event.key}".`;
+        });
+
+        // Press a key and learn what key you pressed, console.log version
+        // Version one
+        function logKey(event) {
+            console.log(`You pressed "${event.key}".`);
+        }
+        addEventListener("keydown", logKey);
+
+        // Anonlymous function example
+        addEventListener("keydown", function (event) {
+            console.log(`You pressed "${event.key}".`);
+        });
+        // Another way 
+        addEventListener("keydown", (event) => {
+            console.log(`You pressed "${event.key}".`);
+        });
+
+        // Implicit return statements
+        const originals = [1, 2, 3];
+        const doubles = originals.map(item => item * 2);
+        console.log(doubles)
+
+        // Equaivalent to: 
+        function doubleItem(item) {
+            return item * 2;
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>

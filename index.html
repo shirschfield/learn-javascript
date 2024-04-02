@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+</head>
+<body>
+  <button>Start machine</button>
+  <p>The machine is stopped.</p>
+
+  <label for="weather">Select the weather type today: </label>
+  <select id="weather">
+    <option value="">--Make a choice--</option>
+    <option value="sunny">Sunny</option>
+    <option value="rainy">Rainy</option>
+    <option value="snowing">Snowing</option>
+    <option value="overcast">Overcast</option>
+  </select>
+
+  <p id="weather-description"></p> <!-- Added id for specific targeting -->
+
+  <label for="theme">Select theme: </label>
+  <select id="theme">
+    <option value="white">White</option>
+    <option value="black">Black</option>
+  </select>
+
+  <h1>This is my website</h1>
+
+  <script>
+    let message = 'Hello!';
+    message = 'World!'; // value changed
+
+    console.log("Hello, World!");
+
+    const btn = document.querySelector("button");
+    const txt = document.querySelector("p");
+
+    btn.addEventListener("click", updateBtn);
+
+    function updateBtn() {
+      if (btn.textContent === "Start machine") {
+        btn.textContent = "Stop machine";
+        txt.textContent = "The machine has started!";
+      } else {
+        btn.textContent = "Start machine";
+        txt.textContent = "The machine is stopped.";
+      }
+    }
+
+    let userName = prompt("Who's there?", '');
+
+    if (userName === 'Admin') {
+      let pass = prompt('Password?', '');
+
+      if (pass === 'TheMaster') {
+        alert( 'Welcome!' );
+      } else if (pass === '' || pass === null) {
+        alert( 'Canceled' );
+      } else {
+        alert( 'Wrong password' );
+      }
+    } else if (userName === '' || userName === null) {
+      alert( 'Canceled' );
+    } else {
+      alert( "I don't know you" );
+    }
+
+    const weatherSelect = document.querySelector("#weather");
+    const themeSelect = document.querySelector("#theme");
+    const weatherDescription = document.querySelector("#weather-description");
+    const html = document.querySelector("html");
+    document.body.style.padding = "10px";
+
+    weatherSelect.addEventListener("change", setWeather);
+
+    function setWeather() {
+      const choice = weatherSelect.value;
+
+      if (choice === "sunny") {
+        weatherDescription.textContent =
+          "It is nice and sunny outside today. Wear shorts! Go to the beach, or the park, and get an ice cream.";
+      } else if (choice === "rainy") {
+        weatherDescription.textContent =
+          "Rain is falling outside; take a rain coat and an umbrella, and don't stay out for too long.";
+      } else if (choice === "snowing") {
+        weatherDescription.textContent =
+          "The snow is coming down — it is freezing! Best to stay in with a cup of hot chocolate, or go build a snowman.";
+      } else if (choice === "overcast") {
+        weatherDescription.textContent =
+          "It isn't raining, but the sky is grey and gloomy; it could turn any minute, so take a rain coat just in case.";
+      } else {
+        weatherDescription.textContent = "";
+      }
+    }
+
+    function updateTheme(bgColor, textColor) {
+      html.style.backgroundColor = bgColor;
+      html.style.color = textColor;
+    }
+
+    themeSelect.addEventListener("change", () =>
+      themeSelect.value === "black"
+        ? updateTheme("black", "white")
+        : updateTheme("white", "black")
+    );
+  </script>
+</body>
+</html>
