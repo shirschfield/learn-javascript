@@ -52,6 +52,26 @@
             }
         });
 
+        // Misc Exercises
+
+        function add7(num) {
+            return num + 7;
+        }
+
+        function multiply(num1, num2) {
+            return num1 * num2
+        }
+
+        function capitalize(str) {
+            if (!str) return str; // Returns the original string if it's empty or not provided
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
+
+        function lastLetter(str) {
+            if (!str) return ''; // Returns an empty string if the input is empty or not provided
+            return str.charAt(str.length - 1);
+        }
+
     </script>
 </body>
 
