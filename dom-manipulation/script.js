@@ -30,6 +30,12 @@ const pInDivElement = document.createElement('p');
 pInDivElement.textContent = 'ME TOO!';
 divElement.appendChild(pInDivElement);
 
-
-
 container.appendChild(divElement);
+
+function alertFunction() {
+    alert("YAY! YOU DID IT!");
+}
+const btn = document.querySelector("#btn");
+btn.addEventListener("click", function (e) {
+    e.target.style.background = "blue";
+  });
