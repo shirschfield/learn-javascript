@@ -9,45 +9,58 @@ function getComputerChoice() {
     }
 }
 
-function playGame() {
-    for (let i = 0; i < 6; i++) {
-        let choice = prompt("Rock, Paper, or Scissors?")
+const scoreDiv = document.createElement("div");
 
-        const playerSelection = choice;
-        const computerSelection = getComputerChoice();
+let playerScoreNumber = 0;
+let computerScoreNumber = 0;
 
-        // Normalize the playerSelection input
-        let normalizedPlayerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+const playerScore = document.createElement("p");;
+const computerScore = document.createElement("p");
+playerScore.textContent = `Player score: ${playerScoreNumber}`;
+computerScore.textContent = `Computer score: ${computerScoreNumber}`;
+scoreDiv.appendChild(playerScore);
+scoreDiv.appendChild(computerScore);
+document.body.appendChild(scoreDiv);
 
-        function playRound(playerSelection, computerSelection) {
+const rockButton = document.querySelector("#rockButton");
+const paperButton = document.querySelector("#paperButton");
+const scissorsButton = document.querySelector("#scissorsButton");
 
-
-            // Comparisons to determine the outcome of the round
-            if (normalizedPlayerSelection === "Rock" && computerSelection === "Scissors") {
-                return "You win! Rock beats scissors";
-            } else if (normalizedPlayerSelection === "Scissors" && computerSelection === "Rock") {
-                return "You lose! Rock beats scissors";
-            } else if (normalizedPlayerSelection === "Scissors" && computerSelection === "Paper") {
-                return "You win! Scissors beats paper";
-            } else if (normalizedPlayerSelection === "Paper" && computerSelection === "Scissors") {
-                return "You lose! Scissors beats paper";
-            } else if (normalizedPlayerSelection === "Rock" && computerSelection === "Paper") {
-                return "You lose! Paper beats rock";
-            } else if (normalizedPlayerSelection === "Paper" && computerSelection === "Rock") {
-                return "You win! Paper beats rock";
-            } else {
-                // Correcting string template syntax for dynamic variable inclusion
-                return `It's a tie! You both choose ${normalizedPlayerSelection}`;
-            }
-        }
-        console.log(`Player's choice: ${normalizedPlayerSelection}`);
-        console.log(`Computer's choice: ${computerSelection}`);
-        // Testing the function with inputs
-        console.log(playRound(playerSelection, computerSelection));
+rockButton.addEventListener("click", function(){playRound("Rock")});
+paperButton.addEventListener("click", function() { playRound("Paper"); });
+scissorsButton.addEventListener("click", function() { playRound("Scissors"); });
 
 
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
+    if ((playerSelection === "Rock" && computerSelection === "Scissors") ||
+        (playerSelection === "Paper" && computerSelection === "Rock") ||
+        (playerSelection === "Scissors" && computerSelection === "Paper")) {
+        playerScoreNumber += 1;
+        playerScore.textContent = `Player Score: ${playerScoreNumber}`;
+        alert("You win!");
+    } else if (playerSelection === computerSelection) {
+        alert("It's a tie!");
+    } else {
+        computerScoreNumber += 1;
+        computerScore.textContent = `Computer Score: ${computerScoreNumber}`;
+        alert("You lose!");
+    }
+
+    // Check for a winner
+    if (playerScoreNumber >= 5 || computerScoreNumber >= 5) {
+        const winner = playerScoreNumber >= 5 ? "Player" : "Computer";
+        alert(`${winner} wins the game!`);
+        
+        // Reset scores for a new game
+        playerScoreNumber = 0;
+        computerScoreNumber = 0;
+        playerScore.textContent = `Player Score: ${playerScoreNumber}`;
+        computerScore.textContent = `Computer Score: ${computerScoreNumber}`;
+        
+        // Optionally, you can also include logic to disable game buttons or make other UI adjustments indicating the game is over
+  
     }
 }
 
-playGame()
 
