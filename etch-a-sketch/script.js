@@ -44,7 +44,9 @@ function createGrid(squaresPerSide) {
                 eraserButton.textContent = 'Eraser On';
             } else {
             this.style.backgroundColor = 'black'; // Change color on click
-            // TODO: fix eraser logic
+            mode === 'draw';
+            eraserButton.textContent = 'Eraser Off';
+            // todo: fix eraser logic
           } });
         });
 
