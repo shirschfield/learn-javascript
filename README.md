@@ -1,1 +1,1 @@
-# learnjavascript
+# learn-javascript
