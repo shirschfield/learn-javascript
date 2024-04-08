@@ -1,6 +1,17 @@
 const container = document.getElementById('container');
 const gridSizeButton = document.getElementById('gridSizeButton');
 
+let mode = 'draw'; // Default mode
+
+// Function to toggle mode
+function selectEraser() {
+    mode = (mode === 'draw') ? 'erase' : 'draw';
+}
+
+
+eraserButton.addEventListener('click', selectEraser);
+
+
 let isMouseDown = false; // Flag to track mouse button state
 
 document.addEventListener('mousedown', function() {
@@ -28,8 +39,13 @@ function createGrid(squaresPerSide) {
             }
             // Optional: Change color on click as well
         square.addEventListener('mousedown', function() {
+            if (mode === 'erase') {
+                this.style.backgroundColor = 'white'; // Erase mode
+                eraserButton.textContent = 'Eraser On';
+            } else {
             this.style.backgroundColor = 'black'; // Change color on click
-        });
+            // TODO: fix eraser logic
+          } });
         });
 
     }
@@ -46,6 +62,9 @@ function clearGrid() {
 
 // Add event listener for the clear button
 clearButton.addEventListener('click', clearGrid);
+
+
+
 
 
 // Initial grid setup
