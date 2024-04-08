@@ -1,9 +1,18 @@
 const container = document.getElementById('container');
 const gridSizeButton = document.getElementById('gridSizeButton');
 
+let isMouseDown = false; // Flag to track mouse button state
+
+document.addEventListener('mousedown', function() {
+    isMouseDown = true; // Set flag to true when mouse button is pressed
+});
+
+document.addEventListener('mouseup', function() {
+    isMouseDown = false; // Clear flag when mouse button is released
+});
+
 function createGrid(squaresPerSide) {
     container.innerHTML = ''; // Clear the existing grid
-    container.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`;
 
     for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
         const square = document.createElement('div');
@@ -11,6 +20,18 @@ function createGrid(squaresPerSide) {
         square.style.width = `calc(100% / ${squaresPerSide} - 2px)`; // Adjust size based on the number of squares
         square.style.height = `calc(960px / ${squaresPerSide} - 2px)`;
         container.appendChild(square);
+
+         // Only change color if mouse is down and moving over squares
+         square.addEventListener('mouseover', function() {
+            if (isMouseDown) {
+                this.style.backgroundColor = 'black'; // Change color on drag
+            }
+            // Optional: Change color on click as well
+        square.addEventListener('mousedown', function() {
+            this.style.backgroundColor = 'black'; // Change color on click
+        });
+        });
+
     }
 }
 
@@ -28,3 +49,5 @@ gridSizeButton.addEventListener('click', () => {
         alert("Please enter a valid number up to 100.");
     }
 });
+
+

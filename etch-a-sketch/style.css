@@ -9,11 +9,11 @@
     width: calc(100% / 16 - 2px); /* Adjust based on the number of squares - accounting for border */
     height: calc(960px / 16 - 2px);
     border: 1px solid black;
-    opacity: .22
+    opacity: 1;
 }
 
-/* Hover effect */
-.grid-square:hover {
-    background-color: blue; /* Or any color you prefer */
-    opacity: 1;
+.button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 20px; /* Add some space at the top, optional */
 }
