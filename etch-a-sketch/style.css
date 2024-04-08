@@ -1,0 +1,19 @@
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 960px;
+    margin: auto;
+}
+
+.grid-square {
+    width: calc(100% / 16 - 2px); /* Adjust based on the number of squares - accounting for border */
+    height: calc(960px / 16 - 2px);
+    border: 1px solid black;
+    opacity: .22
+}
+
+/* Hover effect */
+.grid-square:hover {
+    background-color: blue; /* Or any color you prefer */
+    opacity: 1;
+}
