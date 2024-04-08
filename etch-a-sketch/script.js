@@ -35,6 +35,19 @@ function createGrid(squaresPerSide) {
     }
 }
 
+// Clear grid function
+function clearGrid() {
+    const squares = container.querySelectorAll('.grid-square');
+    squares.forEach(square => {
+        square.style.backgroundColor = ''; // Reset background color
+    });
+}
+
+
+// Add event listener for the clear button
+clearButton.addEventListener('click', clearGrid);
+
+
 // Initial grid setup
 createGrid(16);
 

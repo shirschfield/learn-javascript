@@ -8,7 +8,7 @@
 .grid-square {
     width: calc(100% / 16 - 2px); /* Adjust based on the number of squares - accounting for border */
     height: calc(960px / 16 - 2px);
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.22); /* Black border with reduced opacity */
     opacity: 1;
 }
 
