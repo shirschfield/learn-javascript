@@ -1,11 +1,15 @@
 const container = document.getElementById('container');
 const gridSizeButton = document.getElementById('gridSizeButton');
+const eraserButton = document.getElementById('eraserButton'); // Define the eraserButton
+const clearButton = document.getElementById('clearButton'); // Define the clearButton
+
+
 
 let mode = 'draw'; // Default mode
 
-// Function to toggle mode
 function selectEraser() {
     mode = (mode === 'draw') ? 'erase' : 'draw';
+    eraserButton.textContent = (mode === 'erase') ? 'Eraser On' : 'Eraser Off'; // Update button text based on mode
 }
 
 
@@ -39,14 +43,14 @@ function createGrid(squaresPerSide) {
             }
             // Optional: Change color on click as well
         square.addEventListener('mousedown', function() {
-            if (mode === 'erase') {
+            if (mode === 'draw') {
                 this.style.backgroundColor = 'white'; // Erase mode
                 eraserButton.textContent = 'Eraser On';
             } else {
             this.style.backgroundColor = 'black'; // Change color on click
             mode === 'draw';
             eraserButton.textContent = 'Eraser Off';
-            // todo: fix eraser logic
+            // TODO: clean up eraser logic
           } });
         });
 
