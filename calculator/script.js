@@ -126,3 +126,4 @@ const operate = function (firstNum, secondNum, operator) {
 
     }
 }
+ // TODO: "extra credit" https://www.theodinproject.com/lessons/foundations-calculator
