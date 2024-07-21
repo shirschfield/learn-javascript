@@ -1,68 +1,86 @@
 document.addEventListener("DOMContentLoaded", () => {
-const myLibrary = [];
+let myLibrary = [];
+let newBook
+
+const addBookBtn = document.querySelector('#addBookBtn');
+addBookBtn.addEventListener('click', addBookToLibrary);
 
 
-
-const list = document.querySelector("ul");
-const inputTitle = document.querySelector("#title");
-const inputAuthor = document.querySelector("#author");
-const inputPages = document.querySelector("#pages");
-const inputRead = document.querySelector("#read");
-const addButton = document.querySelector("button");
-
-addButton.addEventListener("click", () => {
-  addBookToLibrary()
-})
-
-
-const input = document.querySelector("input");
-
-addButton.addEventListener("click", () => {
-     const itemText = input.value;
-     input.value = "";
-    
-     const listItem = document.createElement("li");
-     const span = document.createElement("span");
-     const deleteButton = document.createElement("button");
-
-     listItem.appendChild(span);
-     span.textContent = itemText;
-     listItem.appendChild(deleteButton);
-     deleteButton.textContent = "Delete";
-     list.appendChild(listItem);
-
-     deleteButton.addEventListener("click", function(){
-        list.removeChild(listItem);
-     });
-
-     input.focus();
-});
-
-
-function Book(title, author, pages, read) {
-  // the constructor...
+class Book {
+  constructor(title, author, pages, read) {
   this.title = title;
   this.author = author
   this.pages = pages
   this.read = read
-  this.info = function(){
-    console.log(`${this.title} by ${this.author}, ${pages} pages, ${read}.`)
   }
-}
-  
-  const book1 = new Book('The Truth', 'Yenta', '200', 'not read');
-  book1.info(); 
+  }
 
 
 function addBookToLibrary() {
-  const title = inputTitle.value
-  const author = inputAuthor.value
-  const pages = inputPages.value
-  const read = inputRead.checked ? "read" : "not read"
 
-  const newBook = new Book(title, author, pages, read)
+  newBook = new Book(title, author, pages, read)
   myLibrary.push(newBook)
+  displayBooks()
+}
+
+function displayBooks() {
+  const display = document.getElementById('Library-container')
+  const books = document.querySelectorAll('.book')
+  books.forEach(book => display.removeChild(book))
+
+  for (let i=0; i<myLibrary.length; i++) {
+  createBook(myLibrary[i])
+  }
+}
+
+function createBook(item){
+  const library = document.querySelector('#Library-container')
+  const bookDiv = document.createElement('div')
+  const titleDiv = document.createElement('div')
+  const authorDiv = document.createElement('div')
+  const pagesDiv = document.createElement('div')
+  const removeBtn = document.createElement('button')
+  const readBtn = document.createElement('button')
+
+  bookDiv.classList.add('book')
+  bookDiv.setAttribute('id', myLibrary.indexOf(item))
+
+  titleDiv.textContent = item.title
+  titleDiv.classList.add('title')
+  bookDiv.appendChild(titleDiv)
+
+  authorDiv.textContent = item.author
+  authorDiv.classList.add('author')
+  bookDiv.appendChild(authorDiv)
+
+  pagesDiv.textContent = item.pages
+  pagesDiv.classList.add('pages')
+  bookDiv.appendChild(pagesDiv)
+
+  readBtn.classList.add('readBtn')
+  bookDiv.appendChild(readBtn)
+  if(item.read ===false){
+    readBtn.textContent = 'Not Read'
+  } else {
+    readBtn.textContent = 'Read'
+  }
+
+  removeBtn.textContent = 'Remove'
+  removeBtn.setAttribute('id', 'removeBtn')
+  bookDiv.appendChild(removeBtn)
+
+  library.appendChild(bookDiv)
+
+  removeBtn.addEventListener('click', () => {
+    myLibrary.splice(myLibrary.indexOf(item), 1)
+    displayBooks()
+  })
+
+  readBtn.addEventListener('click', () => {
+    item.read = !item.read
+    displayBooks()
+  })
+
 }
 
 })
-
